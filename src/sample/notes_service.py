@@ -14,6 +14,6 @@ class NotesService:
     def averageOf(self, name):
         notes = self.notesStorage.getAllNotesOf(name)
         if len(notes) > 0:
-            return sum(notes)/len(notes)
+            return sum(map(lambda student: student.note, notes))/len(self.notesStorage.getAllNotesOf(name))
         else:
             raise ValueError
