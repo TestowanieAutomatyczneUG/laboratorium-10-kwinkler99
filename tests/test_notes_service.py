@@ -41,3 +41,12 @@ class TestNote(unittest.TestCase):
         test_object = NotesService()
         result = test_object.averageOf
         self.assertRaises(ValueError, result, "Marlena")
+
+    @patch.object(NotesStorage, 'getAllNotesOf')
+    def test_get_all_notes_off_error_two(self, mock_method):
+        # prepare mock
+        mock_method.return_value = TypeError
+        # testing
+        test_object = NotesService()
+        result = test_object.averageOf
+        self.assertRaises(TypeError, result, [])
